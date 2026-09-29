@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Bridge - Translation Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="game-container">
+    
+    <!-- Setup Screen -->
+    <div id="setup" class="section active">
+        <h1>The Bridge</h1>
+        <p class="story-text">Language isn't just something you keep to yourself. It is something you use for those in need.</p>
+        
+        <div class="setup-group">
+            <label>Your Last Name:</label>
+            <input type="text" id="player-last-name" placeholder="e.g., Moynul" autocomplete="off">
+        </div>
+
+        <div class="setup-group">
+            <label>Select Your Family's Language:</label>
+            <select id="fam-lang">
+                <option value="bn">Bangla</option>
+                <option value="hi">Hindi</option>
+                <option value="it">Italian</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+            </select>
+        </div>
+        <br>
+        <button onclick="startLoading()">Begin Memory</button>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading" class="section">
+        <h2>Connecting worlds...</h2>
+        <p>Translating dialogue live via network...</p>
+    </div>
+
+    <!-- Waiting Room Scene -->
+    <div class="waiting-room-bg" id="waiting-room-bg"></div>
+    <div id="waiting-room" class="section">
+        <p class="story-text fade-in">January 20th, 2023. A pungent smell of hand sanitizer fills the room. You are mindlessly scrolling on your phone, completely immersed in your own world. Everyone is tense.</p>
+        <p class="story-text fade-in" id="nurse-call" style="animation-delay: 2s; color: white; font-weight: bold; font-size: 2rem;">"..."</p>
+        <p class="story-text fade-in" style="animation-delay: 3s;">The nurse's voice echoes in the large room.</p>
+        <button class="fade-in" style="animation-delay: 4s;" onclick="enterHospitalRoom()">Stand up and follow her inside</button>
+    </div>
+
+    <!-- Hospital Room Background & Characters -->
+    <div class="scene-bg" id="scene-bg"></div>
+    <div class="characters" id="characters">
+        <div id="doc-container">
+            <div class="char" id="doc-sprite">👨‍⚕️</div>
+            <div class="char-label">Doctor</div>
+        </div>
+        <div>
+            <div class="char" id="mom-sprite">👩</div>
+            <div class="char-label">Mom</div>
+        </div>
+    </div>
+
+    <!-- Dialogue Box -->
+    <div id="dialogue-box">
+        <div class="speaker-name" id="speaker-name">Doctor</div>
+        <div class="dialogue-text" id="dialogue-text">...</div>
+        
+        <button id="next-btn" style="display:none;">Turn to Mom</button>
+        
+        <div id="mcq-container"></div>
+        <div id="error-msg">Miscommunication. Try again.</div>
+    </div>
+
+    <!-- End Screen -->
+    <div id="end" class="section" style="background: rgba(92, 77, 36, 0.95); z-index: 20; position: relative;">
+        <p class="story-text fade-in-out" style="position: absolute; top: 45%; width: 100%; text-align: center; color: white; font-weight: bold; margin: 0;">
+            Your mom praises you...
+        </p>
+        
+        <div id="final-praise-container" class="fade-in-delayed" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <h1 id="translated-praise" style="font-size: 2.5rem; margin-bottom: 10px;">...</h1>
+            <p class="story-text" style="color: white; margin-bottom: 30px;">The tension fades. Your voice felt older than usual. Once again, you safely bridged the two worlds.</p>
+            <button onclick="location.reload()" style="width: auto;">Restart Memory</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

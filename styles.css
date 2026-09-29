@@ -1,0 +1,145 @@
+:root {
+    --bg-dark: #121212;
+    --accent-color: #007bff;
+    --vignette-bg: rgba(0, 0, 0, 0.9);
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-dark);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-color: #111;
+    overflow: hidden;
+}
+
+/* Backgrounds */
+.waiting-room-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(40,40,40,1) 0%, rgba(10,10,10,1) 100%);
+    display: none;
+    z-index: 1;
+}
+.scene-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(200,220,230,0.2), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1920&q=80') center/cover;
+    display: none;
+    z-index: 1;
+}
+
+/* Characters & Movement */
+.characters {
+    position: absolute;
+    bottom: 300px; 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15vw;
+    box-sizing: border-box;
+    display: none;
+    z-index: 5;
+}
+.char {
+    font-size: 120px;
+    filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.6));
+    transition: transform 0.3s ease;
+}
+.char-label {
+    font-size: 18px;
+    text-align: center;
+    background: rgba(0,0,0,0.8);
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin-top: -10px;
+    font-weight: bold;
+}
+
+/* Animations */
+.char.speaking { transform: scale(1.15) translateY(-15px); }
+.walk-in { animation: walkIn 1.5s ease-out forwards; }
+@keyframes walkIn {
+    0% { transform: translateX(-50vw) scale(0.8); opacity: 0; }
+    100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+.fade-in { animation: fadeIn 2s ease-in forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.fade-in-out { animation: fadeInOutSequence 4s forwards; }
+@keyframes fadeInOutSequence {
+    0% { opacity: 0; visibility: visible; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+.fade-in-delayed { opacity: 0; animation: fadeInDelayed 2s forwards; animation-delay: 4s; }
+@keyframes fadeInDelayed {
+    to { opacity: 1; }
+}
+
+/* Sections */
+.section { display: none; padding: 5vw; text-align: center; height: 100%; box-sizing: border-box; z-index: 10; position: relative; }
+.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+/* UI Elements */
+select, button, input {
+    padding: 15px; margin: 10px; border-radius: 8px; border: none; font-size: 18px;
+}
+select, input { background: #333; color: white; width: 60%; max-width: 400px; cursor: pointer; text-align: center; }
+input { border: 2px solid #555; cursor: text; }
+input:focus { outline: none; border-color: var(--accent-color); }
+button { background-color: var(--accent-color); color: white; cursor: pointer; transition: 0.3s; padding: 15px 30px; font-weight: bold; }
+button:hover { background-color: #0056b3; }
+
+.mcq-btn {
+    background-color: #333;
+    width: 100%;
+    max-width: 600px;
+    margin: 5px auto;
+    display: block;
+    text-align: left;
+    padding: 12px 20px;
+}
+.mcq-btn:hover { background-color: #555; }
+
+/* Dialogue Box */
+#dialogue-box {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    background: var(--vignette-bg);
+    border-top: 3px solid #444;
+    padding: 30px 10vw;
+    box-sizing: border-box;
+    min-height: 280px;
+    display: none;
+    text-align: left;
+    z-index: 10;
+}
+.speaker-name { font-weight: bold; margin-bottom: 10px; font-size: 22px; }
+.dialogue-text { font-size: 24px; margin-bottom: 20px; font-style: italic; line-height: 1.4; }
+#mcq-container { display: none; width: 100%; }
+#error-msg { color: #ff4c4c; font-size: 16px; display: none; margin-top: 10px; font-weight: bold; text-align: center; }
+
+h1 { font-size: 3rem; }
+.story-text { font-size: 1.5rem; max-width: 800px; line-height: 1.6; color: #ccc; font-style: italic; margin-bottom: 30px; }
+.setup-group { margin-bottom: 20px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+@media (max-width: 768px) {
+    h1 { font-size: 2rem; }
+    .story-text { font-size: 1.1rem; }
+    select, input { width: 90%; }
+    .characters { padding: 0 5vw; bottom: 340px; }
+    .char { font-size: 80px; }
+    #dialogue-box { min-height: 320px; padding: 20px 5vw; }
+    .speaker-name { font-size: 18px; }
+    .dialogue-text { font-size: 18px; }
+    .mcq-btn { font-size: 14px; padding: 12px; }
+}
