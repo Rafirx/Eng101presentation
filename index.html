@@ -2,13 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>The Bridge - Translation Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div id="game-container">
+
+    <!-- Title-screen background: dusk sky, bridge, drifting greetings -->
+    <div class="setup-bg" id="setup-bg" aria-hidden="true">
+        <div class="moon"></div>
+        <span class="float-word" style="--x:8%;  --d:0s;   --t:14s">Hello</span>
+        <span class="float-word" style="--x:22%; --d:3s;   --t:17s">Hola</span>
+        <span class="float-word" style="--x:36%; --d:7s;   --t:15s">নমস্কার</span>
+        <span class="float-word" style="--x:50%; --d:1.5s; --t:18s">Ciao</span>
+        <span class="float-word" style="--x:64%; --d:5s;   --t:16s">नमस्ते</span>
+        <span class="float-word" style="--x:78%; --d:9s;   --t:14s">Bonjour</span>
+        <span class="float-word" style="--x:90%; --d:4s;   --t:19s">Hello</span>
+        <svg class="bridge" viewBox="0 0 1200 260" preserveAspectRatio="none">
+            <path class="arch" d="M-20 200 Q 600 -40 1220 200"/>
+            <path class="hangers" d="M70 167.7V200M160 140.4V200M250 118.2V200M340 101.1V200M430 89.0V200M520 82.0V200M610 80.0V200M700 83.1V200M790 91.3V200M880 104.5V200M970 122.7V200M1060 146.1V200M1150 174.4V200"/>
+            <rect class="water" x="0" y="200" width="1200" height="60"/>
+            <path class="deck" d="M0 200H1200"/>
+        </svg>
+    </div>
+
     
     <!-- Setup Screen -->
     <div id="setup" class="section active">
@@ -24,6 +43,7 @@
             <label>Select Your Family's Language:</label>
             <select id="fam-lang">
                 <option value="bn">Bangla</option>
+                <option value="en">English</option>
                 <option value="hi">Hindi</option>
                 <option value="it">Italian</option>
                 <option value="es">Spanish</option>
@@ -37,7 +57,7 @@
     <!-- Loading Screen -->
     <div id="loading" class="section">
         <h2>Connecting worlds...</h2>
-        <p>Translating dialogue live via network...</p>
+        <p>Setting the scene...</p>
     </div>
 
     <!-- Waiting Room Scene -->
