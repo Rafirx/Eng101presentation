@@ -81,8 +81,21 @@ function shuffle(arr) {
 
 async function startLoading() {
     const famLang = document.getElementById("fam-lang").value;
-    let lastName = document.getElementById("player-last-name").value.trim();
-    if (lastName === "") lastName = "Family";
+    const nameInput = document.getElementById("player-last-name");
+    const nameError = document.getElementById("name-error");
+    const lastName = nameInput.value.trim();
+
+    // Block the game from starting until a name is entered
+    if (lastName === "") {
+        nameError.style.display = "none";
+        void nameError.offsetWidth; // restart the shake animation
+        nameError.style.display = "block";
+        nameInput.classList.add("invalid");
+        nameInput.focus();
+        return;
+    }
+    nameError.style.display = "none";
+    nameInput.classList.remove("invalid");
 
     document.getElementById("setup").classList.remove("active");
     document.getElementById("loading").classList.add("active");
@@ -228,4 +241,14 @@ function endGame() {
     if ("ResizeObserver" in window) new ResizeObserver(update).observe(box);
     window.addEventListener("resize", update);
     update();
+})();
+
+// Clear the error as soon as they type; Enter key starts the game
+(function () {
+    const input = document.getElementById("player-last-name");
+    input.addEventListener("input", () => {
+        input.classList.remove("invalid");
+        document.getElementById("name-error").style.display = "none";
+    });
+    input.addEventListener("keydown", e => { if (e.key === "Enter") startLoading(); });
 })();

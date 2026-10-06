@@ -291,3 +291,11 @@ h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
     #loading h2::after { animation: none; }
     .float-word { animation: none !important; opacity: 0.45; }
 }
+
+/* Name validation */
+#name-error {
+    display: none; color: #ffb3b3; font-weight: bold; font-size: 15px;
+    margin-top: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    animation: shake 0.4s ease-in-out;
+}
+input.invalid { border-color: #ff6b6b; }
